@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css" />
+
+    <title>SMP NEGERI 2 LEMAHABANG</title>
+
+    <style>
+        <style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background: url('https://iili.io/2AZp6wg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+  }
+      body {
+        background: linear-gradient(to bottom, #ffffff, #d9f2ff);
+        font-family: 'Arial', sans-serif;
+      }
+      .jumbotron {
+        background: linear-gradient(to right, #2f80ed, #56ccf2);
+        color: white;
+        padding: 2rem 1rem;
+      }
+      .jumbotron img {
+        border-radius: 50%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      table thead {
+        background-color: #2e0158;
+        color: white;
+      }
+      table tbody td {
+        background-color: #f9f9f9;
+        transition: background-color 0.3s ease;
+      }
+      table tbody td:hover {
+        background-color: #ffe7b9;
+      }
+      footer {
+        background-color: #2e0158;
+        color: white;
+        padding: 1rem 0;
+      }
+      footer a {
+        color: #ffe57f;
+        text-decoration: none;
+      }
+      footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body id="home">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2e0158;">
+      <div class="container">
+        <a class="navbar-brand" href="#">SMPN 2 Lemahabang</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="galery.html">gallery</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+    
+    
+    <main>
+        <section>
+            
+            <form id="contactForm">
+                <label for="name">Name:</label>
+                     <input type="text" id="name" placeholder="Nama mu" required>
+                <p></p>
+                <label for="email">Email:</label>
+             <input type="email" id="email" placeholder="email mu yang aktif" required>
+                <p></p>
+                <label for="nomor">NO WA :</label>
+                     <input type="number" id="nomor" placeholder="awalan wajib 62" required>
+                <p></p>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" placeholder="pesan yang mau di kirim atu sampaikan" required> </textarea>
+                <button type="button" id="sendButton">Send</button>
+            </form>
+        </section>
+    </main>
+    <!-- foter -->
+    <footer class="text-center">
+      <p>
+        Created with <i class="bi bi-heart-fill text-danger"></i> by
+        <a href="https://www.instagram.com/xpendala.id/" target="_blank">xpendala.id</a>
+        <p>SMPN 2 LEMAHABANG </p>
+        <p>© By YOKOTO_SAIBA</p>
+        
+      </p>
+    </footer>
+    
+  
+
+    <script>
+        document.getElementById('sendButton').addEventListener('click', function() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const nomor = document.getElementById('nomor').value;
+            const message = document.getElementById('message').value;
+
+            const token = "7634973023:AAEEVxeXA0tCZqiazEVIVhaKlTn02HFmUiE"; // Ganti dengan token bot lu
+            const chat_id = "7016045840"; // Ganti dengan chat ID lu
+            const text = `
+New Contact Form Submission:
+Name: ${name}
+Email: ${email}
+No WA: wa.me/${nomor}
+Message: ${message}
+            `;
+
+            const url = `https://api.telegram.org/bot${token}/sendMessage`;
+
+            // Kirim data ke Telegram API
+            fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    chat_id: chat_id,
+                    text: text,
+                    parse_mode: "HTML"
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Message sent successfully!");
+                    document.getElementById('contactForm').reset();
+                } else {
+                    alert("Failed to send message.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred.");
+            });
+        });
+    </script>
+</body>
+</html>
